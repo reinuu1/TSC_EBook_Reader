@@ -4,6 +4,10 @@
 
 **OpenBook** este un e-reader open-source proiectat în jurul microcontrollerului ESP32-C6, echipat cu un display E-Ink de 7.5 inch, baterie Li-Po, card microSD și senzori de mediu.
 
+**Block Diagram**
+
+![diagrama6](https://github.com/user-attachments/assets/d8a71524-a5b7-4171-8a46-ec750c3841a8)
+
 
 
 ## Mapping pini ESP32-C6
