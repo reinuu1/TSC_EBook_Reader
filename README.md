@@ -27,7 +27,153 @@
 | IO/CHANGE Btn | IO15      | Navigare                     |
 | RESET         | EN        | Reset MCU                    |
 
-## 🧱 Design Decizii & Trade-offs
+
+Microcontroller: ESP32-C6-WROOM-1
+Arhitectură: RISC-V 32-bit, 160MHz
+
+Memorie: 320KB ROM, 512KB SRAM
+
+Conectivitate: Wi-Fi 6 (2.4GHz), Bluetooth 5.0
+
+Consum: ~10mA activ, ~160μA deep sleep
+
+Interfețe utilizate:
+
+SPI: pentru e-paper, microSD, memorie Flash
+
+I2C: pentru RTC, senzor de mediu
+
+GPIO: pentru butoane, LED, semnale control
+
+Display: Waveshare 7.5" e-Ink V2
+Tip: e-paper (E-Ink)
+
+Rezoluție: 800x480 pixeli
+
+Interfață: SPI (cu pinii dedicați CS, DC, RST, BUSY)
+
+Consum: ~1.2mW activ, ~0.1mW standby
+
+Conectare la ESP32-C6:
+
+IO7 → MOSI
+
+IO6 → SCK
+
+IO10 → CS
+
+IO5 → DC
+
+IO23 → RST
+
+IO3 → BUSY
+
+Stocare: MicroSD + SPI Flash
+microSD (până la 32GB FAT32)
+
+IO4 → CS_SD
+
+IO2 → MISO
+
+IO7 → MOSI (partajat)
+
+IO6 → SCK (partajat)
+
+Flash SPI externă (Winbond W25Q64JV – 64Mb)
+
+IO11 → CS
+
+IO2, IO6, IO7 partajați
+
+Senzor Mediu: Bosch BME688
+Funcții: temperatură, umiditate, presiune, compuși gazoși
+
+Interfață: I2C
+
+Conectare:
+
+IO21 → SDA
+
+IO22 → SCL
+
+IO19 → VDDIO (enable senzor)
+
+Consum: ~3.6mA măsurare, ~0.1μA sleep
+
+Timp Real: RTC DS3231
+Precizie: ±2ppm, compensat termic
+
+Back-up: funcționează pe baterie dacă sistemul e oprit
+
+Interfață: I2C
+
+Conectare:
+
+IO21 → SDA
+
+IO22 → SCL
+
+IO18 → RST
+
+IO0 → INT/SQW
+
+IO1 → 32KHz Clock Out
+
+Consum: ~1.5μA backup, ~0.1μA sleep
+
+Alimentare & Baterie
+Baterie: Li-Po 1800–2500mAh
+
+Charger: MCP73831T (cu LED status)
+
+Regulator: LDO 3.3V (XC6221)
+
+Protecții:
+
+Diodă Schottky: protecție polaritate inversă
+
+Varistor ESD: protecție USB
+
+Supercapacitor: buffering la boot/flash
+
+Consum total estimat:
+
+Modul	Activ (mA)	Sleep (μA)
+ESP32-C6	~10	~160
+Display	~1.2	~0.1
+microSD	~50	~10
+BME688	~3.6	~0.1
+RTC	~0.0015	~0.0001
+Total	~65mA	~170μA
+Interfață utilizator
+3 Butoane tactile (TS-1187A):
+
+IO9 → BOOT
+
+IO15 → CHANGE
+
+EN → RESET
+
+LED status: conectat la pin + rezistor pull-down
+
+Feedback simplu: control prin GPIO
+
+Alte componente cheie
+Hirose FH34SRJ-24S – conector FPC pentru e-paper
+
+Test Pads: pentru depanare, montate pe silkscreen
+
+Qwiic/I²C Header: pentru extensii viitoare (ex: ecran secundar, senzori extra)
+
+Observații finale
+Toate comunicațiile SPI sunt partajate pe același bus, controlate prin CS separat.
+
+Designul este gândit pentru eficiență energetică și poate funcționa zeci de ore în standby.
+
+Tot sistemul este gândit pentru a fi reproductibil și open-source, ușor de extins cu alte module I²C sau SPI
+
+
+Design Decizii & Trade-offs
 
 - Am ales ESP32-C6 pentru capabilități Wi-Fi/BLE și suport FreeRTOS
 - Folosirea unui e-paper reduce drastic consumul în stand-by
@@ -35,7 +181,7 @@
 - Butoanele au fost puse pe pini liberi fără funcții speciale
 
 
-## 🔎 Debug & Testare
+Debug & Testare
 
 - Verificat DRC (JLCPCB 2 layer .dru)
 - Testat alimentarea cu Li-Po + încărcare
