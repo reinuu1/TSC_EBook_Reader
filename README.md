@@ -156,23 +156,23 @@ Designul este gândit pentru eficiență energetică și poate funcționa zeci d
 Tot sistemul este gândit pentru a fi reproductibil și open-source, ușor de extins cu alte module I²C sau SPI
 
 
-## 🧠 Design Decizii & Trade-offs
+##  Design Decizii & Trade-offs
 
-- ✅ Alegere ESP32-C6: conectivitate & suport FreeRTOS  
-- ✅ E-paper pentru consum redus  
-- ✅ Un singur bus SPI (cu CS dedicat pentru SD și e-paper)  
-- ✅ GPIO-uri simple pentru butoane
-
-
-## ✅ Debug & Testare
-
-- ✔️ Verificare DRC (JLCPCB .dru)  
-- ✔️ Alimentare testată cu Li-Po + charging  
-- ✔️ Interfețe SPI & I2C testate cu logic analyzer  
-- ✔️ Consumul în deep sleep confirmat < 200μA
+-  Alegere ESP32-C6: conectivitate & suport FreeRTOS  
+-  E-paper pentru consum redus  
+-  Un singur bus SPI (cu CS dedicat pentru SD și e-paper)  
+-  GPIO-uri simple pentru butoane
 
 
-## 📎 Datasheet-uri & Linkuri componente
+## Debug & Testare
+
+-  Verificare DRC (JLCPCB .dru)  
+-  Alimentare testată cu Li-Po + charging  
+-  Interfețe SPI & I2C testate cu logic analyzer  
+-  Consumul în deep sleep confirmat < 200μA
+
+
+##  Datasheet-uri & Linkuri componente
 
 |                 Componentă                |                                                     Link Datasheet                                                            |                                                          LINK                                                                           |
 |-------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
