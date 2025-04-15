@@ -62,88 +62,63 @@ Acesta dispune de:
 - **Interfață:** SPI  
 - **Consum:** ~1.2mW activ, ~0.1mW standby
 
-## 🔋 Alimentare & Baterie
+## 🔋 Alimentare
 
-- Baterie: **Li-Po 1800–2500mAh**  
-- Încărcare: **MCP73831T**  
-- Regulator: **XC6221 LDO 3.3V**
+- **Baterie:** Li-Po 1800–2500mAh  
+- **Încărcător:** MCP73831  
+- **Regulator:** XC6221 LDO 3.3V  
 
-Conectare la ESP32-C6:
+**Protecții integrate:**
+
+- Diodă Schottky – polaritate inversă  
+- Varistor ESD – protecție USB  
+- Supercapacitor – buffering boot/flash  
+
+**Conectare la ESP32-C6:**
 
 IO7 → MOSI
-
 IO6 → SCK
-
 IO10 → CS
-
 IO5 → DC
-
 IO23 → RST
-
 IO3 → BUSY
 
-Stocare: MicroSD + SPI Flash
-microSD (până la 32GB FAT32)
+## Stocare: MicroSD + SPI Flash
+### microSD (până la 32GB FAT32)
 
 IO4 → CS_SD
-
 IO2 → MISO
-
 IO7 → MOSI (partajat)
-
 IO6 → SCK (partajat)
-
 Flash SPI externă (Winbond W25Q64JV – 64Mb)
-
 IO11 → CS
-
 IO2, IO6, IO7 partajați
 
-Senzor Mediu: Bosch BME688
-Funcții: temperatură, umiditate, presiune, compuși gazoși
+##  Senzor Mediu: Bosch BME688
+- Măsoară: temperatură, umiditate, presiune, compuși gazoși  
+- **Consum:** ~3.6mA activ, ~0.1μA sleep  
+- **Interfață:** I2C  
 
-Interfață: I2C
-
-Conectare:
+**Conectare:**
 
 IO21 → SDA
-
 IO22 → SCL
-
 IO19 → VDDIO (enable senzor)
 
-Consum: ~3.6mA măsurare, ~0.1μA sleep
+## RTC: DS3231
 
-Timp Real: RTC DS3231
-Precizie: ±2ppm, compensat termic
+- **Precizie:** ±2ppm, compensat termic  
+- **Backup:** funcționează pe baterie  
+- **Consum:** ~1.5μA backup, ~0.1μA sleep 
 
-Back-up: funcționează pe baterie dacă sistemul e oprit
-
-Interfață: I2C
-
-Conectare:
+**Conectare:**
 
 IO21 → SDA
-
 IO22 → SCL
-
 IO18 → RST
-
 IO0 → INT/SQW
-
 IO1 → 32KHz Clock Out
 
-Consum: ~1.5μA backup, ~0.1μA sleep
-
-
-
-Protecții:
-
-Diodă Schottky: protecție polaritate inversă
-
-Varistor ESD: protecție USB
-
-Supercapacitor: buffering la boot/flash
 
 ## ⚡ Estimare consum
 
@@ -156,25 +131,22 @@ Supercapacitor: buffering la boot/flash
 | RTC         | ~0.0015    | ~0.0001    |
 | **Total**   | **~65mA**  | **~170μA** |
 
-Interfață utilizator
-3 Butoane tactile (TS-1187A):
+
+## Interfață utilizator
+- 3 Butoane tactile (TS-1187A):
 
 IO9 → BOOT
-
 IO15 → CHANGE
-
 EN → RESET
 
-LED status: conectat la pin + rezistor pull-down
+- LED status: GPIO + rezistor pull-down  
+- Feedback: control simplu via GPIO 
 
-Feedback simplu: control prin GPIO
+## Alte componente
 
-Alte componente cheie
-Hirose FH34SRJ-24S – conector FPC pentru e-paper
-
-Test Pads: pentru depanare, montate pe silkscreen
-
-Qwiic/I²C Header: pentru extensii viitoare (ex: ecran secundar, senzori extra)
+- **Conector FPC:** Hirose FH34SRJ-24S  
+- **Test Pads:** silkscreen pentru depanare  
+- **Qwiic/I²C Header:** pentru extensii viitoare 
 
 Observații finale
 Toate comunicațiile SPI sunt partajate pe același bus, controlate prin CS separat.
