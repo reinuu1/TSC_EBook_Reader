@@ -1,10 +1,22 @@
-# TSC_EBook_Reader
-# Proiect realizat de: DINU Andrei-Marian
-# Pentru cursul: Teoria Sistemelor de Calcul, 2025
+# 📘 TSC_EBook_Reader
 
-**OpenBook** este un e-reader open-source proiectat în jurul microcontrollerului ESP32-C6, echipat cu un display E-Ink de 7.5 inch, baterie Li-Po, card microSD și senzori de mediu.
+## 👨‍💻 Proiect realizat de: DINU Andrei-Marian  
+### 📚 Pentru cursul: Teoria Sistemelor de Calcul, 2025  
 
-**Block Diagram**
+---
+
+## 🔍 Descriere generală
+
+**OpenBook** este un e-reader open-source, construit în jurul microcontrollerului **ESP32-C6**.  
+Acesta dispune de:
+
+- Display **E-Ink 7.5"**
+- Baterie **Li-Po**
+- Stocare **microSD**
+- Senzori de mediu (**BME688**)
+- Modul RTC (**DS3231**)
+
+---
 
 ![diagrama6](https://github.com/user-attachments/assets/d8a71524-a5b7-4171-8a46-ec750c3841a8)
 
@@ -32,15 +44,12 @@
 | RESET         | EN        | Reset MCU                    |
 
 
-Microcontroller: ESP32-C6-WROOM-1
-Arhitectură: RISC-V 32-bit, 160MHz
+- **Arhitectură:** RISC-V 32-bit @ 160 MHz  
+- **Memorie:** 320KB ROM, 512KB SRAM  
+- **Conectivitate:** Wi-Fi 6 (2.4GHz), Bluetooth 5.0  
+- **Consum:** ~10mA activ, ~160μA deep sleep
 
-Memorie: 320KB ROM, 512KB SRAM
-
-Conectivitate: Wi-Fi 6 (2.4GHz), Bluetooth 5.0
-
-Consum: ~10mA activ, ~160μA deep sleep
-
+- 
 Interfețe utilizate:
 
 SPI: pentru e-paper, microSD, memorie Flash
@@ -49,14 +58,17 @@ I2C: pentru RTC, senzor de mediu
 
 GPIO: pentru butoane, LED, semnale control
 
-Display: Waveshare 7.5" e-Ink V2
-Tip: e-paper (E-Ink)
+## 🖥️ Display: Waveshare 7.5" e-Ink V2
 
-Rezoluție: 800x480 pixeli
+- **Rezoluție:** 800x480 px  
+- **Interfață:** SPI  
+- **Consum:** ~1.2mW activ, ~0.1mW standby
 
-Interfață: SPI (cu pinii dedicați CS, DC, RST, BUSY)
+## 🔋 Alimentare & Baterie
 
-Consum: ~1.2mW activ, ~0.1mW standby
+- Baterie: **Li-Po 1800–2500mAh**  
+- Încărcare: **MCP73831T**  
+- Regulator: **XC6221 LDO 3.3V**
 
 Conectare la ESP32-C6:
 
@@ -125,12 +137,7 @@ IO1 → 32KHz Clock Out
 
 Consum: ~1.5μA backup, ~0.1μA sleep
 
-Alimentare & Baterie
-Baterie: Li-Po 1800–2500mAh
 
-Charger: MCP73831T (cu LED status)
-
-Regulator: LDO 3.3V (XC6221)
 
 Protecții:
 
@@ -140,15 +147,17 @@ Varistor ESD: protecție USB
 
 Supercapacitor: buffering la boot/flash
 
-Consum total estimat:
+## ⚡ Estimare consum
 
-Modul	Activ (mA)	Sleep (μA)
-ESP32-C6	~10	~160
-Display	~1.2	~0.1
-microSD	~50	~10
-BME688	~3.6	~0.1
-RTC	~0.0015	~0.0001
-Total	~65mA	~170μA
+| Modul       | Activ (mA) | Sleep (μA) |
+|-------------|------------|------------|
+| ESP32-C6    | ~10        | ~160       |
+| Display     | ~1.2       | ~0.1       |
+| microSD     | ~50        | ~10        |
+| BME688      | ~3.6       | ~0.1       |
+| RTC         | ~0.0015    | ~0.0001    |
+| **Total**   | **~65mA**  | **~170μA** |
+
 Interfață utilizator
 3 Butoane tactile (TS-1187A):
 
@@ -177,21 +186,23 @@ Designul este gândit pentru eficiență energetică și poate funcționa zeci d
 Tot sistemul este gândit pentru a fi reproductibil și open-source, ușor de extins cu alte module I²C sau SPI
 
 
-Design Decizii & Trade-offs
+## 🧠 Design Decizii & Trade-offs
 
-- Am ales ESP32-C6 pentru capabilități Wi-Fi/BLE și suport FreeRTOS
-- Folosirea unui e-paper reduce drastic consumul în stand-by
-- Am optat pentru o singură interfață SPI partajată (e-paper + SD) cu CS separat
-- Butoanele au fost puse pe pini liberi fără funcții speciale
+- ✅ Alegere ESP32-C6: conectivitate & suport FreeRTOS  
+- ✅ E-paper pentru consum redus  
+- ✅ Un singur bus SPI (cu CS dedicat pentru SD și e-paper)  
+- ✅ GPIO-uri simple pentru butoane
 
 
-Debug & Testare
+## ✅ Debug & Testare
 
-- Verificat DRC (JLCPCB 2 layer .dru)
-- Testat alimentarea cu Li-Po + încărcare
-- Verificat interfațare SPI + I2C pe bus logic analyzer
-- Verificat consum în deep sleep sub 200µA
+- ✔️ Verificare DRC (JLCPCB .dru)  
+- ✔️ Alimentare testată cu Li-Po + charging  
+- ✔️ Interfețe SPI & I2C testate cu logic analyzer  
+- ✔️ Consumul în deep sleep confirmat < 200μA
 
+
+## 📎 Datasheet-uri & Linkuri componente
 
 |                 Componentă                |                                                     Link Datasheet                                                            |                                                          LINK                                                                           |
 |-------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
