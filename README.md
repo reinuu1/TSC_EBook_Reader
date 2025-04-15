@@ -44,19 +44,17 @@ Acesta dispune de:
 | RESET         | EN        | Reset MCU                    |
 
 
+## Microcontroller: ESP32-C6-WROOM-1
+
 - **Arhitectură:** RISC-V 32-bit @ 160 MHz  
 - **Memorie:** 320KB ROM, 512KB SRAM  
 - **Conectivitate:** Wi-Fi 6 (2.4GHz), Bluetooth 5.0  
-- **Consum:** ~10mA activ, ~160μA deep sleep
+- **Consum:** ~10mA activ, ~160μA deep sleep  
 
-- 
-Interfețe utilizate:
-
-SPI: pentru e-paper, microSD, memorie Flash
-
-I2C: pentru RTC, senzor de mediu
-
-GPIO: pentru butoane, LED, semnale control
+**Interfețe utilizate:**
+- **SPI** – e-paper, microSD, memorie Flash
+- **I2C** – RTC, senzor de mediu
+- **GPIO** – butoane, LED, semnale control
 
 ## 🖥️ Display: Waveshare 7.5" e-Ink V2
 
