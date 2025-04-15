@@ -18,7 +18,8 @@ Acesta dispune de:
 
 ---
 
-![diagrama6](https://github.com/user-attachments/assets/d8a71524-a5b7-4171-8a46-ec750c3841a8)
+![image](https://github.com/user-attachments/assets/ecef11f1-078e-417a-927e-0e990ee9ecb5)
+
 
 
 
